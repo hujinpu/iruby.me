@@ -2,3 +2,4 @@ iruby.me.push
 *.swp
 *~
 .DS_Store
+_site*

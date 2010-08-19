@@ -1,0 +1,90 @@
+---
+layout: post
+title: Ruby's Object Model
+---
+
+h1. {{ page.title }}
+
+p(meta). 19 Aug 2010 - Beijing
+
+What’s an object? It’s just a bunch of instance variables, plus a link to a class. The object’s methods don’t live in the object—they live in the object’s class, where they’re called the instance methods of the class.
+What’s a class? It’s just an object (an instance of Class), plus a list of instance methods and a link to a superclass. Class is a subclass of Module, so a class is also a module.
+
+Like any object, a class has its own methods, such as new( ). These are instance methods of the Class class. Also like any object, classes must be accessed through references. You already have a constant reference to each class: the class’s name.
+
+The class of Class must be Class itself.
+
+{% highlight ruby %}
+class MyClass; end
+
+obj1 = MyClass.new
+obj2 = MyClass.new
+
+obj3 = MyClass.new
+obj3.instance_variable_set("@x", 10)
+obj3.instance_variable_get("@x") # => 10
+{% endhighlight %}
+
+!/uploads/blog/2010/08/19/objects-classes.png!
+
+Constants are arranged in a tree similar to a file system, where the names of modules and classes play the part of directories and regular constants play the part of files.
+
+Suming up the process of method lookup in a single sentence: to find a method, Ruby goes in the receiver’s class, and from there it climbs the ancestors chain until it finds the method.
+
+{% highlight ruby %}
+class MyClass
+  def my_method; 'my_method()'; end
+end
+
+class MySubclass < MyClass
+end
+
+obj = MySubclass.new
+obj.my_method()       # => "my_method()"
+
+MySubclass.ancestors # => [MySubclass, MyClass, Object, Kernel, BasicObject]
+{% endhighlight %}
+
+!/uploads/blog/2010/08/19/method-lockup.png!
+
+The ancestors chain goes from class to superclass. Actually, the ancestors chain also includes modules.
+
+{% highlight ruby %}
+module M
+  def my_method
+    'M#my_method()'
+  end
+end
+
+class C
+  include M
+end
+
+class D < C; end
+
+D.new.my_method() # => "M#my_method()"
+
+D.ancestors # => [D, C, M, Object, Kernel, BasicObject]
+{% endhighlight %}
+
+!/uploads/blog/2010/08/19/ancestors.png!
+
+If you want to become a master of Ruby, you should always know which object has the role self at any given moment.  All methods called without an explicit receiver are called on self.  
+
+As soon as you start a Ruby program, you’re sitting within an object named main that the Ruby interpreter created for you. This object is sometimes called the top-level context, because it’s the object you’re in when you’re at the top level of the call stack: either you haven’t called any method yet or all the methods that you called have returned.
+
+Private methods are governed by a single simple rule: you cannot call a private method with an explicit receiver. In other words, every time you call a private method, it must be on the implicit receiver—self.
+
+{% highlight ruby %}
+class C
+  def public_method
+    self.private_method
+  end
+
+  private 
+
+  def private_method; end
+end
+
+C.new.public_method # => NoMethodError: private method ‘private_method' called [...]
+{% endhighlight %}
