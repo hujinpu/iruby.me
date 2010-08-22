@@ -5,7 +5,7 @@ title: Ruby's Object Model
 
 h1. {{ page.title }}
 
-p(meta). 19 Aug 2010 - Beijing
+p(meta). 19 Aug 2010 - Beijing | Category: Ruby
 
 What’s an object? It’s just a bunch of instance variables, plus a link to a class. The object’s methods don’t live in the object—they live in the object’s class, where they’re called the instance methods of the class.
 What’s a class? It’s just an object (an instance of Class), plus a list of instance methods and a link to a superclass. Class is a subclass of Module, so a class is also a module.

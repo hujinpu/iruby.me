@@ -5,7 +5,7 @@ title: ruby多版本并存的管理之道--RVM
 
 h1. {{ page.title }}
 
-p(meta). 17 Aug 2010 - Beijing
+p(meta). 17 Aug 2010 - Beijing | Category: Ruby
 
 <abbr title="Ruby Version Manager">RVM</abbr>是一个命令行工具，使用它你可以快速的安装、管理多个版本的ruby以及对应的gems。
 
