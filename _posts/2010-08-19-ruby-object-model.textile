@@ -94,7 +94,7 @@ Seven rules of the Ruby object model:
 * There is only one kind of module—be it a regular module, a class, an eigenclass, or a proxy class(include a module into a class will generate proxy class).
 * There is only one kind of method, and it lives in a module—most often in a class.
 * Every object, classes included, has its own “real class,” be it a regular class or an eigenclass.
-* Every class has exactly one superclass, with the exception of Basi- cObject (or Object if you’re using Ruby 1.8), which has none. This means you have a single ancestors chain from any class up to BasicObject.
+* Every class has exactly one superclass, with the exception of BasicObject (or Object if you’re using Ruby 1.8), which has none. This means you have a single ancestors chain from any class up to BasicObject.
 * The superclass of the eigenclass of an object is the object’s class. The superclass of the eigenclass of a class is the eigenclass of the class’s superclass. 
 * When you call a method, Ruby goes “right” in the receiver’s real class and then “up” the ancestors chain. That’s all there is to know about the way Ruby finds methods.
 
