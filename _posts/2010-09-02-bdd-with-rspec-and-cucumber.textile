@@ -35,7 +35,7 @@ Hello world example:
 
 feature:
 
-{% highlight bash %}
+{% highlight ruby %}
 Feature: greeter says hello
 
   In order to start learning RSpec and Cucumber
@@ -50,7 +50,7 @@ Feature: greeter says hello
 
 steps:
 
-{% highlight bash %}
+{% highlight ruby %}
 class CucumberGreeter
   def greet
     "Hello Cucumber!"
@@ -72,7 +72,7 @@ end
 
 Rspec => spec
 
-{% highlight bash %}
+{% highlight ruby %}
 class RSpecGreeter
   def greet
     "Hello RSpec!"
