@@ -12,7 +12,8 @@ p(meta). 17 Aug 2010 - Beijing | Category: Ruby
 RVM的安装：
 
 {% highlight bash %}
-bash < < (curl http://rvm.beginrescueend.com/releases/rvm-install-latest) #注意两个小于号间有空格
+bash < <( curl http://rvm.beginrescueend.com/releases/rvm-install-head )
+#注意两个小于号间有空格，以及第二个小于号与左括号间没有空格
 {% endhighlight %}
 
 安装某个版本的ruby：
